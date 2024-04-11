@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d8fb7c8-407a-421c-94e3-006694bca3cb" name="Changes" comment="added funtionality to main function for bookbot" />
+    <list default="true" id="4d8fb7c8-407a-421c-94e3-006694bca3cb" name="Changes" comment="added funtionality to main function for bookbot">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +128,7 @@
       <option name="presentableId" value="Default" />
       <updated>1708276562101</updated>
       <workItem from="1708276573716" duration="2775000" />
-      <workItem from="1710077835577" duration="6371000" />
+      <workItem from="1710077835577" duration="7792000" />
     </task>
     <task id="LOCAL-00001" summary="amended main.py">
       <created>1708279321695</created>
@@ -148,7 +151,28 @@
       <option name="project" value="LOCAL" />
       <updated>1710080637150</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added letterCount and wordCount procedures">
+      <created>1710086810712</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710086810712</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added letterCount and wordCount procedures">
+      <created>1710087724790</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1710087724790</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added letterCount and wordCount procedures">
+      <created>1710087830068</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1710087830068</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,10 +192,13 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LIMIT_HISTORY" value="false" />
-    <MESSAGE value="amended main.py" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/bookbot" />
+    </ignored-roots>
     <MESSAGE value="added funtionality to main function for bookbot" />
     <MESSAGE value="added letterCount and wordCount procedures" />
-    <option name="LAST_COMMIT_MESSAGE" value="added letterCount and wordCount procedures" />
+    <MESSAGE value="amended main.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="amended main.py" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/practice$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1708278508602" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/bookbot" />
