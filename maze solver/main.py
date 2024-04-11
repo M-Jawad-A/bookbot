@@ -12,8 +12,8 @@ class Window:
         self.height = height
         self.root = Tk()
         self.root.title("Maze")
-        self.canvas = Canvas(self.root, bg="White", bd=self.width, height=self.height)
-        self.canvas.pack(fill=BOTH, expand=1)
+        self.__canvas = Canvas(self.root, bg="White", bd=self.width, height=self.height)
+        self.__canvas.pack(fill=BOTH, expand=1)
         self.running = False
         self.root.protocol("WM_DELETE_WINDOW", self.close)
 
@@ -32,11 +32,25 @@ class Window:
         '''a method to close the window'''
         self.running = False
 
+    def drawLine(self, colour, line):
+        line.Draw(self.__canvas, colour)
+
 
 class Point:
     def __init__(self, x, y):
         self.x = x
-        self. y = y
+        self.y = y
+
+
+class Line:
+    def __init__(self, pointA, pointB):
+        self.beginningPoint = pointA
+        self.endPoint = pointB
+
+    def draw(self, canvas, colour):
+        canvas.create_line(self.beginningPoint.x, self.beginningPoint.y, self.endPoint.x, self.endPoint.y, fill=colour
+                           , width=2)
+        canvas.pack(fill=BOTH, expand=1)
 
 
 if __name__ == '__main__':
