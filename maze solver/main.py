@@ -33,5 +33,11 @@ class Window:
         self.running = False
 
 
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self. y = y
+
+
 if __name__ == '__main__':
     main()
