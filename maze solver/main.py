@@ -2,14 +2,20 @@ from tkinter import Tk, BOTH, Canvas
 
 
 def main():
-    win = Window(150, 300)
-    # point1 = Point(200, 221)
-    # point2 = Point(200, 256)
-    # line1 = Line(point1, point2, win)
-    # win.drawLine("Red", line1)
+    win = Window(150, 350)
+    point1 = Point(100, 221)
+    point2 = Point(200, 240)
+    line1 = Line(point1, point2, win)
+    win.drawLine("Red", line1)
 
     cell = Cell(win)
     cell.draw(200, 250, 300, 280)
+    cell1 = Cell(win)
+    cell1.draw(250, 300, 350, 330)
+    cell2 = Cell(win)
+    cell2.draw(400, 450, 420, 480)
+
+    cell1.drawMove(cell)
     win.waitForClose()
 
 
@@ -75,6 +81,10 @@ class Cell:
         self.window = window
 
     def draw(self, x1, y1, x2, y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
         if self.hasTopWall:
             pointA = Point(x1, y1)
             pointB = Point(x2, y1)
@@ -95,6 +105,19 @@ class Cell:
             pointB = Point(x1, y2)
             line = Line(pointA, pointB, self.window)
             self.window.drawLine("Black", line)
+
+    def drawMove(self, toCell, undo=False):
+        newX1 = abs(self.x1 + self.x2) // 2
+        newY1 = abs(self.y1 + self.y2) // 2
+        newX2 = abs(toCell.x1 + toCell.x2) // 2
+        newY2 = abs(toCell.y1 + toCell.y2) // 2
+        pointA = Point(newX1, newY1)
+        pointB = Point(newX2, newY2)
+        line = Line(pointA, pointB, self.window)
+        if not undo:
+            self.window.drawLine("Red", line)
+        else:
+            self.window.drawLine("Gray", line)
 
 
 if __name__ == '__main__':
