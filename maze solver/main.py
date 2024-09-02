@@ -26,7 +26,7 @@ def main():
     # cell1.drawMove(cell)
     # cell1.drawMove(cell2, undo=True)
 
-    Maze(200, 250, 5, 5, 25, 25, win)
+    Maze(200, 250, 5, 5, 50, 50, win)
     win.waitForClose()
 
 
@@ -135,7 +135,7 @@ class Cell:
 
 
 class Maze:
-    def __init__(self, x1, y1, numRows, numColumns, cellSizex, cellSizey, window):
+    def __init__(self, x1, y1, numRows, numColumns, cellSizex, cellSizey, window=None):
         self.x1 = x1
         self.y1 = y1
         self.numRows = numRows
@@ -148,35 +148,25 @@ class Maze:
 
     def createCells(self):
         ''' a method to create cells in the maze'''
-        cellA = Cell(self.window)
-        cellB = Cell(self.window)
-        cellC = Cell(self.window)
-        cellD = Cell(self.window)
-        cellE = Cell(self.window)
-        self.cells.append(cellA)
-        self.cells.append(cellB)
-        self.cells.append(cellC)
-        self.cells.append(cellD)
-        self.cells.append(cellE)
-        placement = 0
-        for i in self.cells:
-            if i == cellA:
-                self.drawCell(self.x1, self.y1)
-                placement += 1
-            else:
-                self.drawCell(self.cells[placement-1].x2, self.cells[placement-1].y2)
-                placement += 1
+        for a in range(self.numCols):
+            columnCells = []
+            for b in range(self.numRows):
+                columnCells.append(Cell(self.window))
+            self.cells.append(columnCells)
+        for i in range(self.numCols):
+            for j in range(self.numRows):
+                self.drawCell(i, j)
 
     def drawCell(self, i, j):
         '''a method to draw the cells for the maze'''
-        for k in self.cells:
-            k.draw(i, j, i+self.cellSizex, j + self.cellSizey)
+        self.cells[i][j].draw((self.x1 + i * self.cellSizex), (self.y1 + j * self.cellSizey), (self.x1 + self.cellSizex)
+                              , (self.y1 + self.cellSizey))
         self.animate()
 
     def animate(self):
         '''a method to refresh the window after every cell is drawn'''
         self.window.redraw()
-        time.sleep(0.5)
+        time.sleep(0.1)
 
 
 if __name__ == '__main__':
