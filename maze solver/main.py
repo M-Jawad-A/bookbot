@@ -3,10 +3,13 @@ from tkinter import Tk, BOTH, Canvas
 
 def main():
     win = Window(150, 300)
-    point1 = Point(200, 221)
-    point2 = Point(200, 256)
-    line1 = Line(point1, point2, win)
-    win.drawLine("Red", line1)
+    # point1 = Point(200, 221)
+    # point2 = Point(200, 256)
+    # line1 = Line(point1, point2, win)
+    # win.drawLine("Red", line1)
+
+    cell = Cell(win)
+    cell.draw(200, 250, 300, 280)
     win.waitForClose()
 
 
@@ -37,7 +40,6 @@ class Window:
         self.running = False
 
     def drawLine(self, colour, line):
-        print("drawing line")
         drawnLine = Line(line.beginningPoint, line.endPoint, self.canvas)
         drawnLine.draw(colour)
 
@@ -55,10 +57,44 @@ class Line:
         self.window = window
 
     def draw(self, colour):
-        print("doing a draw line")
-        self.window.create_line(self.beginningPoint.x, self.beginningPoint.y, self.endPoint.x, self.endPoint.y, fill=colour,
-                           width=2)
+        self.window.create_line(self.beginningPoint.x, self.beginningPoint.y, self.endPoint.x, self.endPoint.y,
+                                fill=colour, width=2)
         self.window.pack(fill=BOTH, expand=1)
+
+
+class Cell:
+    def __init__(self, window):
+        self.hasLeftWall = True
+        self.hasRightWall = True
+        self.hasTopWall = True
+        self.hasBottomWall = True
+        self.x1 = None
+        self.y1 = None
+        self.x2 = None
+        self.y2 = None
+        self.window = window
+
+    def draw(self, x1, y1, x2, y2):
+        if self.hasTopWall:
+            pointA = Point(x1, y1)
+            pointB = Point(x2, y1)
+            line = Line(pointA, pointB, self.window)
+            self.window.drawLine("Black", line)
+        if self.hasBottomWall:
+            pointA = Point(x1, y2)
+            pointB = Point(x2, y2)
+            line = Line(pointA, pointB, self.window)
+            self.window.drawLine("Black", line)
+        if self.hasRightWall:
+            pointA = Point(x2, y1)
+            pointB = Point(x2, y2)
+            line = Line(pointA, pointB, self.window)
+            self.window.drawLine("Black", line)
+        if self.hasLeftWall:
+            pointA = Point(x1, y1)
+            pointB = Point(x1, y2)
+            line = Line(pointA, pointB, self.window)
+            self.window.drawLine("Black", line)
 
 
 if __name__ == '__main__':
