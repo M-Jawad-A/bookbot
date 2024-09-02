@@ -26,7 +26,8 @@ def main():
     # cell1.drawMove(cell)
     # cell1.drawMove(cell2, undo=True)
 
-    Maze(200, 250, 5, 5, 50, 50, win)
+    maze = Maze(200, 250, 5, 5, 50, 50, win)
+    maze.breakEntranceAndExit()
     win.waitForClose()
 
 
@@ -135,7 +136,7 @@ class Cell:
 
 
 class Maze:
-    def __init__(self, x1, y1, numRows, numColumns, cellSizex, cellSizey, window=None):
+    def __init__(self, x1, y1, numRows, numColumns, cellSizex, cellSizey, window):
         self.x1 = x1
         self.y1 = y1
         self.numRows = numRows
@@ -167,6 +168,17 @@ class Maze:
         '''a method to refresh the window after every cell is drawn'''
         self.window.redraw()
         time.sleep(0.1)
+
+    def breakEntranceAndExit(self):
+        '''a method to remove entrance and exit walls '''
+        entrancePoint1 = Point(self.x1, self.y1)
+        entrancePoint2 = Point(self.x1+self.cellSizex, self.y1)
+        entranceLine = Line(entrancePoint1, entrancePoint2, self.window)
+        self.window.drawLine("White", entranceLine)
+        exitPoint1 = Point(self.x1+(self.cellSizex*(self.numCols-2)), self.y1+(self.cellSizey*(self.numRows-1)))
+        exitPoint2 = Point(self.x1+(self.cellSizex*(self.numCols-1)), self.y1+(self.cellSizey*(self.numRows-1)))
+        exitLine = Line(exitPoint1, exitPoint2, self.window)
+        self.window.drawLine("White", exitLine)
 
 
 if __name__ == '__main__':
