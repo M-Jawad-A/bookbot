@@ -1,21 +1,32 @@
+import time
 from tkinter import Tk, BOTH, Canvas
 
 
 def main():
     win = Window(150, 350)
-    point1 = Point(100, 221)
+    point1 = Point(150, 221)
     point2 = Point(200, 240)
     line1 = Line(point1, point2, win)
-    win.drawLine("Red", line1)
-
+    # win.drawLine("Red", line1)
     cell = Cell(win)
-    cell.draw(200, 250, 300, 280)
+    cell.hasBottomWall = False
+    # cell.draw(200, 250, 250, 300)
     cell1 = Cell(win)
-    cell1.draw(250, 300, 350, 330)
+    cell1.hasTopWall = False
+    cell1.hasRightWall = False
+    # cell1.draw(200, 300, 250, 350)
     cell2 = Cell(win)
-    cell2.draw(400, 450, 420, 480)
+    cell2.hasLeftWall = False
+    # cell2.draw(250, 300, 300, 350)
+    cell3 = Cell(win)
+    # cell3.draw(160, 340, 300, 310)
+    cell4 = Cell(win)
+    # cell4.draw(280, 360, 250, 350)
 
-    cell1.drawMove(cell)
+    # cell1.drawMove(cell)
+    # cell1.drawMove(cell2, undo=True)
+
+    Maze(200, 250, 5, 5, 25, 25, win)
     win.waitForClose()
 
 
@@ -63,6 +74,7 @@ class Line:
         self.window = window
 
     def draw(self, colour):
+        '''a method to draw a line'''
         self.window.create_line(self.beginningPoint.x, self.beginningPoint.y, self.endPoint.x, self.endPoint.y,
                                 fill=colour, width=2)
         self.window.pack(fill=BOTH, expand=1)
@@ -81,6 +93,7 @@ class Cell:
         self.window = window
 
     def draw(self, x1, y1, x2, y2):
+        '''a method to draw a cell'''
         self.x1 = x1
         self.y1 = y1
         self.x2 = x2
@@ -107,6 +120,7 @@ class Cell:
             self.window.drawLine("Black", line)
 
     def drawMove(self, toCell, undo=False):
+        '''a method to draw a line to join the middle of two cells'''
         newX1 = abs(self.x1 + self.x2) // 2
         newY1 = abs(self.y1 + self.y2) // 2
         newX2 = abs(toCell.x1 + toCell.x2) // 2
@@ -118,6 +132,51 @@ class Cell:
             self.window.drawLine("Red", line)
         else:
             self.window.drawLine("Gray", line)
+
+
+class Maze:
+    def __init__(self, x1, y1, numRows, numColumns, cellSizex, cellSizey, window):
+        self.x1 = x1
+        self.y1 = y1
+        self.numRows = numRows
+        self.numCols = numColumns
+        self.cellSizex = cellSizex
+        self.cellSizey = cellSizey
+        self.window = window
+        self.cells = []
+        self.createCells()
+
+    def createCells(self):
+        ''' a method to create cells in the maze'''
+        cellA = Cell(self.window)
+        cellB = Cell(self.window)
+        cellC = Cell(self.window)
+        cellD = Cell(self.window)
+        cellE = Cell(self.window)
+        self.cells.append(cellA)
+        self.cells.append(cellB)
+        self.cells.append(cellC)
+        self.cells.append(cellD)
+        self.cells.append(cellE)
+        placement = 0
+        for i in self.cells:
+            if i == cellA:
+                self.drawCell(self.x1, self.y1)
+                placement += 1
+            else:
+                self.drawCell(self.cells[placement-1].x2, self.cells[placement-1].y2)
+                placement += 1
+
+    def drawCell(self, i, j):
+        '''a method to draw the cells for the maze'''
+        for k in self.cells:
+            k.draw(i, j, i+self.cellSizex, j + self.cellSizey)
+        self.animate()
+
+    def animate(self):
+        '''a method to refresh the window after every cell is drawn'''
+        self.window.redraw()
+        time.sleep(0.5)
 
 
 if __name__ == '__main__':
